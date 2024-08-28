@@ -1,0 +1,221 @@
+* {
+    box-sizing: border-box; /* Ensures padding and borders are included in the element's width and height */
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: #ffffdf; /* Change background color */
+}
+
+/* Header Styling */
+header.header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #78091e;
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center; /* Center items vertically */
+    padding: 0 20px;
+}
+
+/* Header Image */
+header.header img {
+    max-width: 100px;
+    height: auto;
+}
+
+header.header .header-content {
+    flex: 1; /* Allow the header content to expand */
+    display: flex;
+    flex-direction: column; /* Stack the items vertically */
+    align-items: center; /* Center the items horizontally */
+    justify-content: center; /* Center items vertically */
+    gap: 5px; /* Equal gap between the elements */
+    text-align: center; /* Center text */
+    margin-left: -90px;
+}
+
+header.header h4 {
+    font-size: 20px;
+    margin: 0; /* Remove default margin */
+}
+
+header.header h5 {
+    font-size: 17px;
+    margin: 0; /* Remove default margin */
+}
+
+/* Footer Styling */
+footer.footer {
+    margin-top: 80px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #78091e;
+    padding: 25px 10px; /* Reduced padding */
+    color: white;
+    text-align: center;
+    z-index: 1000; /* Ensure it stays on top */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Add subtle shadow for distinction */
+}
+
+footer.footer h4, footer.footer h5, footer.footer h6 {
+    font-size: 14px; /* Reduced font size */
+}
+
+footer.footer img {
+    max-width: 50px; /* Reduced logo size */
+}
+
+
+
+.notification {
+    position: fixed;
+    top: 20px; /* Adjusted to appear below the header */
+    right: 10px;
+    z-index: 1100; /* Increased z-index to ensure it appears above the header */
+    display: none; /* Hidden by default */
+    width: 320px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    background: #ffffdf;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px -3px #111;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Add transitions */
+    transform: translateY(-20px); /* Start from above */
+    }
+    
+    .notification.show {
+        display: flex; /* Show the notification */
+        opacity: 1;
+        transform: translateY(0); /* Move to original position */
+    }
+    
+    .notification.hide {
+        opacity: 0;
+        transform: translateY(20px); /* Move up and fade out */
+    }
+    
+    .notification__icon {
+        width: 20px;
+        height: 20px;
+        transform: translateY(-2px);
+        margin-right: 8px;
+    }
+    
+    .notification__icon path {
+        fill: #800000;
+    }
+    
+    .notification__title {
+        font-weight: 500;
+        font-size: 14px;
+        color: #800000;
+    }
+    
+    .notification__close {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        margin-left: auto;
+    }
+    
+    .notification__close path {
+        fill: #800000;
+    }
+
+    /* Profile Card Styling */
+    .profile-card {
+        max-width: 350px;
+        margin: 0 auto;
+        padding: 30px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-top: 70px;
+    }
+
+    /* Profile Picture Styling */
+    .profile-picture {
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border: 4px solid #333b42;
+        margin-bottom: 20px;
+    }
+
+    /* Typography Styling */
+    .user-name {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .user-institution, .user-department {
+        color: #555;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    /* Button Styling */
+    .btn {
+        margin-top: 10px;
+        width: 80%;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* Specific Button Colors */
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .btn-primary {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .btn-view {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    /* Hover Effects */
+    .btn:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    .btn-primary:hover {
+        background-color: #c82333;
+    }
+
+    .btn-view:hover {
+        background-color: #c82333;
+    }

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Researcher Profile Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <style>
+        /* Custom CSS to position flash messages in the top right corner */
+        .flash-message-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+            /* Higher than most elements to stay on top */
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body class="sb-nav-fixed">
+    <div class="flash-message-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div id="flash-message" class="alert alert-dismissible fade show" role="alert">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="{{ url_for('index') }}">Researcher Profile</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+                    aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i
+                        class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fas fa-user fa-fw"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li>
+                        <a class="dropdown-item" href="#"
+                            onclick="document.getElementById('logout-form').submit(); return false;">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ url_for('logout') }}" method="POST" style="display: none;">
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        </br></br></br>
+                        <a class="nav-link" href="{{ url_for('index') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="{{ url_for('tables') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            DataBase
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Dashboard</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Researcher Profile</li>
+                    </ol>
+
+                    <div class="row">
+                        <!-- Staff Summary Container (Top Left) -->
+                        <div class="col-lg-8 mb-4">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Staff Summary
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12 mb-4">
+                                            <div class="card mb-4">
+                                                <div class="card-header">
+                                                    <i class="fas fa-chart-bar me-1"></i>
+                                                    Total Counts Chart
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="chart-container">
+                                                        <canvas id="totalCountsChart"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Color Palette Settings Container (Immediately Below Staff Summary) -->
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-palette me-1"></i>
+                                    Color Palette Settings
+                                </div>
+                                <div class="card-body">
+                                    <form action="{{ url_for('save_colors') }}" method="POST">
+                                        <div class="mb-3">
+                                            <label for="header_color" class="form-label">Choose a color for the
+                                                header:</label>
+                                            <input type="color" id="header_color" name="header_color"
+                                                class="form-control" value="{{ header_color }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="sidebar_color" class="form-label">Choose a color for the
+                                                sidebar:</label>
+                                            <input type="color" id="sidebar_color" name="sidebar_color"
+                                                class="form-control" value="{{ sidebar_color }}">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Save Colors</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Department Counts Container (Top Right) -->
+                        <div class="col-lg-4 mb-4">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-building me-1"></i>
+                                    Department Summary
+                                </div>
+                                <div class="card-body">
+                                    <div class="mt-3 text-center mx-3">
+                                        <strong>Total Departments:</strong> {{ department_counts|length }}
+                                    </div>
+                                    <ul class="list-group mt-3">
+                                        {% for department, count in department_counts %}
+                                        <li class="list-group-item">
+                                            {{ department }} - {{ count }}
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Madras Christian College 2024</div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/datatables-simple-demo.js') }}"></script>
+    <script>
+        // Automatically hide flash messages after a few seconds
+        setTimeout(function () {
+            var alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function (alert) {
+                var bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 3000); // Adjust the time (in milliseconds) as needed
+    </script>
+    <script>
+        // Chart.js configuration
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('totalCountsChart').getContext('2d');
+            var totalCountsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Total Staff in College', 'Total Staff in Database', 'Remaining Staff'],
+                    datasets: [{
+                        label: 'Staff Counts',
+                        data: [{{ total_college_staff }}, {{ total_staff_in_db }}, {{ remaining_staff }}],
+            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+            borderColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+            borderWidth: 1
+                        }]
+                    },
+            options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+                });
+            });
+    </script>
+</body>
+
+</html>

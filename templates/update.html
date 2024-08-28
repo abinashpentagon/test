@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Information</title>   
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+        
+<style>
+    .form-container {
+   display: flex;
+   flex-direction: column;
+   gap: 20px; /* Space between different form sections */
+   
+}
+
+.form-section {
+   display: flex;
+   flex-direction: column;
+   position: relative; /* To position the Add button absolutely */
+   padding: 20px;
+   border: 1px solid #d3d7d7;
+   border-radius: 5px;
+   background-color: #f9f9f9;
+   
+}
+
+.form-section h4 {
+   margin-bottom: 15px;
+   font-size: 1.3em;
+   font-weight: bold;
+   color: #333;
+}
+
+.form-content {
+   flex: 1; /* Allows the content to grow and push the Add button down */
+   overflow: auto; /* Adds scroll if content overflows */
+   
+}
+
+.form-group {
+   margin-bottom: 15px;
+   display: flex;
+   align-items: center;
+   gap: 10px;  /* Add space between textboxes */
+   flex-wrap: wrap; /* Ensures input boxes align properly on smaller screens */
+   
+}
+
+.form-control {
+   flex: 1 1 30%;  /* Adjust width and spacing dynamically */
+   padding: 10px;
+   margin-right: 10px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   font-family: 'Times New Roman', Times, serif;
+}
+
+.add-btn {
+   position: absolute;
+   bottom: 20px; /* Distance from the bottom of the container */
+   width: 100%;  /* Make the Add button span the width */
+}
+
+.remove-btn {
+   background-color: #dc3545;
+   color: #fff;
+   cursor: pointer;
+}
+
+.btn-primary {
+   background-color: #0069d9;
+   width: 95%;
+   color: #fff;
+}
+
+.btn-danger {
+   background-color: #dc3545;
+   color: #fff;
+}
+.submit {
+   background-color: #007BFF; /* Primary blue color */
+   color: white; /* White text color */
+   padding: 12px 24px; /* Padding for the button */
+   font-size: 16px; /* Font size */
+   border: none; /* Remove border */
+   border-radius: 5px; /* Rounded corners */
+   cursor: pointer; /* Pointer cursor on hover */
+   transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.submit:hover {
+   background-color: #0056b3; /* Darker blue on hover */
+   transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.submit:active {
+   background-color: #004080; /* Even darker blue on click */
+   transform: translateY(0); /* Reset lift on click */
+}
+
+.submit:focus {
+   outline: none; /* Remove outline */
+   box-shadow: 0px 0px 0px 3px rgba(0, 123, 255, 0.5); /* Blue focus ring */
+}
+
+</style>
+</head>
+<body>
+    <header class="header">
+        <img src="/static/images/mcc_logo.png" alt="MCC Logo">
+        <div class="header-content">
+            <h4>MADRAS CHRISTIAN COLLEGE (AUTONOMOUS)</h4>
+            <h4>TAMBARAM, CHENNAI - 600 059</h4></br>
+            <h5>DEANERY - RESEARCH AND DEVELOPMENT</h5>
+        </div>  
+    </header>
+    <div class="notification hide" id="notification">
+        <div class="notification__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none">
+                <path fill="#fff" d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"></path>
+            </svg>
+        </div>
+        <div class="notification__title" id="notification-title"></div>
+        <div class="notification__close" id="notification-close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20">
+                <path fill="#fff" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path>
+            </svg>
+        </div>
+    </div>
+    <div class="content">
+        <div class="login-container">
+            <h2>UPDATE DETAILS</h2></br>
+           
+            <form action="{{ url_for('update_profile', email=staff['email']) }}" method="POST" enctype="multipart/form-data">
+                <!-- Include the staff ID (hidden) -->
+                <input type="hidden" name="id" value="{{ staff.id }}">
+                <div class="form-section">
+                    <h2>Personal Information</h2></br>
+                    <div class="form-group">
+                        <input type="text" name="name"  value="{{ staff.name }}" class="form-control" placeholder="Full Name" required 
+                               data-toggle="tooltip" data-placement="top" title="Enter your full name as it appears on official documents.">
+                    </div>
+                    <div class="form-group">
+                        <select name="department" class="form-control" required 
+                                data-toggle="tooltip" data-placement="top" title="Select your degree program.">
+                                <option value="B. A. English Language and Literature" {{ 'selected' if staff.department == 'B. A. English Language and Literature' else '' }}>B. A. English Language and Literature</option>
+                <option value="B. A. Tamil Literature" {{ 'selected' if staff.department == 'B. A. Tamil Literature' else '' }}>B. A. Tamil Literature</option>
+                <option value="B. A. History" {{ 'selected' if staff.department == 'B. A. History' else '' }}>B. A. History</option>
+                <option value="B. A. Political Science" {{ 'selected' if staff.department == 'B. A. Political Science' else '' }}>B. A. Political Science</option>
+                <option value="B. A. Economics" {{ 'selected' if staff.department == 'B. A. Economics' else '' }}>B. A. Economics</option>
+                <option value="B. A. Philosophy" {{ 'selected' if staff.department == 'B. A. Philosophy' else '' }}>B. A. Philosophy</option>
+                <option value="B. Com. – Commerce" {{ 'selected' if staff.department == 'B. Com. – Commerce' else '' }}>B. Com. – Commerce (Aided)</option>
+                <option value="B. Sc. Mathematics" {{ 'selected' if staff.department == 'B. Sc. Mathematics' else '' }}>B. Sc. Mathematics</option>
+                <option value="B. Sc. Statistics" {{ 'selected' if staff.department == 'B. Sc. Statistics' else '' }}>B. Sc. Statistics</option>
+                <option value="B. Sc. Physics" {{ 'selected' if staff.department == 'B. Sc. Physics' else '' }}>B. Sc. Physics</option>
+                <option value="B. Sc. Chemistry" {{ 'selected' if staff.department == 'B. Sc. Chemistry' else '' }}>B. Sc. Chemistry</option>
+                <option value="B. Sc. Plant Biology and Plant Biotechnology" {{ 'selected' if staff.department == 'B. Sc. Plant Biology and Plant Biotechnology' else '' }}>B. Sc. Plant Biology and Plant Biotechnology</option>
+                <option value="B. Sc. Zoology" {{ 'selected' if staff.department == 'B. Sc. Zoology' else '' }}>B. Sc. Zoology</option>
+                <option value="M. A. English Language and Literature" {{ 'selected' if staff.department == 'M. A. English Language and Literature' else '' }}>M. A. English Language and Literature</option>
+                <option value="M. A. Tamil Literature" {{ 'selected' if staff.department == 'M. A. Tamil Literature' else '' }}>M. A. Tamil Literature</option>
+                <option value="M. A. History" {{ 'selected' if staff.department == 'M. A. History' else '' }}>M. A. History</option>
+                <option value="M. A. Political Science" {{ 'selected' if staff.department == 'M. A. Political Science' else '' }}>M. A. Political Science</option>
+                <option value="M. A. Public Administration" {{ 'selected' if staff.department == 'M. A. Public Administration' else '' }}>M. A. Public Administration</option>
+                <option value="M. A. Economics" {{ 'selected' if staff.department == 'M. A. Economics' else '' }}>M. A. Economics</option>
+                <option value="M. A. Philosophy" {{ 'selected' if staff.department == 'M. A. Philosophy' else '' }}>M. A. Philosophy</option>
+                <option value="M. Com. – Commerce" {{ 'selected' if staff.department == 'M. Com. – Commerce' else '' }}>M. Com. – Commerce</option>
+                <option value="M. S. W. (Community Development & Medical Psychiatry)" {{ 'selected' if staff.department == 'M. S. W. (Community Development & Medical Psychiatry)' else '' }}>M. S. W. (Community Development & Medical Psychiatry)</option>
+                <option value="M. Sc. Mathematics" {{ 'selected' if staff.department == 'M. Sc. Mathematics' else '' }}>M. Sc. Mathematics</option>
+                <option value="M. Sc. Statistics" {{ 'selected' if staff.department == 'M. Sc. Statistics' else '' }}>M. Sc. Statistics</option>
+                <option value="M. Sc. Physics" {{ 'selected' if staff.department == 'M. Sc. Physics' else '' }}>M. Sc. Physics</option>
+                <option value="M. Sc. Chemistry" {{ 'selected' if staff.department == 'M. Sc. Chemistry' else '' }}>M. Sc. Chemistry (Aided)</option>
+                <option value="M. Sc. Plant Biology and Plant Biotechnology" {{ 'selected' if staff.department == 'M. Sc. Plant Biology and Plant Biotechnology' else '' }}>M. Sc. Plant Biology and Plant Biotechnology</option>
+                <option value="M. Sc. Zoology" {{ 'selected' if staff.department == 'M. Sc. Zoology' else '' }}>M. Sc. Zoology</option>
+                <option value="B. A. Journalism" {{ 'selected' if staff.department == 'B. A. Journalism' else '' }}>B. A. Journalism</option>
+                <option value="B. A. History (Vocational)– (Archeology and Museology) – (Shift I)" {{ 'selected' if staff.department == 'B. A. History (Vocational)– (Archeology and Museology) – (Shift I)' else '' }}>B. A. History (Vocational)– (Archeology and Museology) – (Shift I)</option>
+                <option value="B. S. W. Social Work" {{ 'selected' if staff.department == 'B. S. W. Social Work' else '' }}>B. S. W. Social Work</option>
+                <option value="B. Com. – Commerce (SFS)" {{ 'selected' if staff.department == 'B. Com. – Commerce (SFS)' else '' }}>B. Com. – Commerce (SFS)</option>
+                <option value="B. Com. Accounting and Finance" {{ 'selected' if staff.department == 'B. Com. Accounting and Finance' else '' }}>B. Com. Accounting and Finance</option>
+                <option value="B. Com. Professional Accounting" {{ 'selected' if staff.department == 'B. Com. Professional Accounting' else '' }}>B. Com. Professional Accounting</option>
+                <option value="B. B. A. Business Administration" {{ 'selected' if staff.department == 'B. B. A. Business Administration' else '' }}>B. B. A. Business Administration</option>
+                <option value="B. Sc. Geography, Tourism and Travel Management" {{ 'selected' if staff.department == 'B. Sc. Geography, Tourism and Travel Management' else '' }}>B. Sc. Geography, Tourism and Travel Management</option>
+                <option value="B. Sc. Hospitality and Tourism" {{ 'selected' if staff.department == 'B. Sc. Hospitality and Tourism' else '' }}>B. Sc. Hospitality and Tourism</option>
+                <option value="B. Sc. Microbiology" {{ 'selected' if staff.department == 'B. Sc. Microbiology' else '' }}>B. Sc. Microbiology</option>
+                <option value="B. C. A. Computer Application" {{ 'selected' if staff.department == 'B. C. A. Computer Application' else '' }}>B. C. A. Computer Application</option>
+                <option value="B. Sc. Computer Science" {{ 'selected' if staff.department == 'B. Sc. Computer Science' else '' }}>B. Sc. Computer Science</option>
+                <option value="B. Sc. Visual Communication" {{ 'selected' if staff.department == 'B. Sc. Visual Communication' else '' }}>B. Sc. Visual Communication</option>
+                <option value="B. Sc. Physical Education, Health Education and Sports" {{ 'selected' if staff.department == 'B. Sc. Physical Education, Health Education and Sports' else '' }}>B. Sc. Physical Education, Health Education and Sports</option>
+                <option value="B. Sc. Psychology" {{ 'selected' if staff.department == 'B. Sc. Psychology' else '' }}>B. Sc. Psychology</option>
+                <option value="B. Sc. Mathematics (SFS)" {{ 'selected' if staff.department == 'B. Sc. Mathematics (SFS)' else '' }}>B. Sc. Mathematics (SFS)</option>
+                <option value="B. Sc. Physics (SFS)" {{ 'selected' if staff.department == 'B. Sc. Physics (SFS)' else '' }}>B. Sc. Physics (SFS)</option>
+                <option value="M. S. W. Social Work (Human Resource Management)" {{ 'selected' if staff.department == 'M. S. W. Social Work (Human Resource Management)' else '' }}>M. S. W. Social Work (Human Resource Management)</option>
+                <option value="M. Com. Computer Oriented Business Application" {{ 'selected' if staff.department == 'M. Com. Computer Oriented Business Application' else '' }}>M. Com. Computer Oriented Business Application</option>
+                <option value="M. A. Communication" {{ 'selected' if staff.department == 'M. A. Communication' else '' }}>M. A. Communication</option>
+                <option value="M. Sc. Applied Microbiology" {{ 'selected' if staff.department == 'M. Sc. Applied Microbiology' else '' }}>M. Sc. Applied Microbiology</option>
+                <option value="M. C. A. Computer Application" {{ 'selected' if staff.department == 'M. C. A. Computer Application' else '' }}>M. C. A. Computer Application</option>
+                <option value="M. Sc. Data Science (Provisional)" {{ 'selected' if staff.department == 'M. Sc. Data Science (Provisional)' else '' }}>M. Sc. Data Science (Provisional)</option>
+                <option value="M. Sc. Chemistry (SFS)" {{ 'selected' if staff.department == 'M. Sc. Chemistry (SFS)' else '' }}>M. Sc. Chemistry (SFS)</option>                
+                
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="title" value="{{ staff.title }}" class="form-control" placeholder="Title" required 
+                               data-toggle="tooltip" data-placement="top" title="Enter your professional title.">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="institution" value="{{ staff.institution }}" class="form-control" placeholder="Institution" required 
+                               data-toggle="tooltip" data-placement="top" title="Enter your affiliated institution.">
+                    </div>
+                
+                    <div class="form-group">
+                        <input type="tel" name="phone" class="form-control" value="{{ staff.phone }}" placeholder="Phone" required 
+                               data-toggle="tooltip" data-placement="top" title="Enter your phone number.">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="address" value="{{ staff.address }}" class="form-control" placeholder="Address" required 
+                               data-toggle="tooltip" data-placement="top" title="Enter your residential address.">
+                    </div>
+                    <div class="form-group">
+                        <input type="url" name="website" value="{{ staff.website }}"class="form-control" placeholder="Website" 
+                               data-toggle="tooltip" data-placement="top" title="Enter your personal or professional website URL.">
+                    </div>
+                    <div class="form-group">
+                        <!-- File Input for Profile Picture -->
+                        
+                        <input type="file" name="profile_picture" class="form-control" id="profile_picture"
+                               data-toggle="tooltip" data-placement="top" title="Upload a profile picture.">
+                        
+                        <!-- Display Current Profile Picture and Remove Button -->
+                        {% if staff.profile_picture %}
+                        <div class="profile-picture-container">
+                            <img src="{{ url_for('static', filename='uploads/' + staff.profile_picture) }}" 
+                                 alt="Profile Picture" width="100" style="vertical-align: middle;">
+                            <button type="button" id="remove-profile-picture" style="vertical-align: middle;">Remove</button>
+                            <input type="hidden" name="remove_profile_picture" id="remove_profile_picture" value="">
+                        </div>
+                        {% else %}
+                        <p>No profile picture available</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea name="research_areas" class="form-control" placeholder="Research Areas" rows="5"  
+                                  data-toggle="tooltip" data-placement="top" title="Enter your research areas. Separate each area with a new line.">{{ ', '.join(staff.research_areas) if staff.research_areas else '' }}</textarea>
+                    </div>
+                </div></br>
+                
+                <!-- Career Highlights Section -->
+                <div class="form-section">
+                    <h4>Career Highlights</h4>
+                    <div class="form-group">
+                        <textarea name="career_highlights" class="form-control" placeholder="Career Highlights" rows="5" 
+                                  data-toggle="tooltip" data-placement="top" title="Enter your career highlights. Separate each highlight with a new line.">{{ '\n'.join(staff.career_highlights) }}</textarea>
+                    </div>
+                </div></br></br>
+    
+                <!-- Research Career Section -->
+                <div class="form-section">
+                    <h4>Research Career</h4>
+                    <div class="form-group">
+                        <textarea name="research_career" class="form-control" placeholder="Research Career" rows="5" 
+                                  data-toggle="tooltip" data-placement="top" title="Enter your research career details. Separate each detail with a new line.">{{ '\n'.join(staff.research_career) }}</textarea>
+                    </div>
+                </div></br></br>
+
+                <div class="form-container">
+                    <!-- Education Section -->
+                    <div class="form-section" id="education_container">
+                        <h4>Education</h4>
+                        <div class="form-content">
+                            {% for item in staff.education %}
+                                <div class="form-group">
+                                    <input type="text" name="education_degree_{{ loop.index }}" value="{{ item.degree }}" placeholder="Degree" class="form-control">
+                                    <input type="text" name="education_college_{{ loop.index }}" value="{{ item.college }}" placeholder="College" class="form-control">
+                                    <input type="text" name="education_duration_{{ loop.index }}" value="{{ item.duration }}" placeholder="Duration" class="form-control">
+                                    <button type="button" class="btn btn-danger remove-btn" onclick="removeField(this)">Remove</button>
+                                </div>
+                            {% endfor %}
+                        </div></br></br>
+                        <button type="button" class="btn btn-primary add-btn" onclick="addField('education_container', 'education')">Add Education</button>
+                    </div>
+                
+                    <!-- Research IDs Section -->
+                    <div class="form-section" id="research_ids_container">
+                        <h4>Research IDs</h4>
+                        <div class="form-content">
+                            {% for item in staff.research_ids %}
+                                <div class="form-group">
+                                    <input type="text" name="research_ids_title_{{ loop.index }}" value="{{ item.title }}" placeholder="Title" class="form-control">
+                                    <input type="text" name="research_ids_id_{{ loop.index }}" value="{{ item.id }}" placeholder="ID" class="form-control">
+                                    <button type="button" class="btn btn-danger remove-btn" onclick="removeField(this)">Remove</button>
+                                </div>
+                            {% endfor %}
+                        </div></br></br>
+                        <button type="button" class="btn btn-primary add-btn" onclick="addField('research_ids_container', 'research_ids')">Add Research ID</button>
+                    </div>
+                
+                    <!-- Funding Section -->
+                    <div class="form-section" id="fundingContainer">
+                        <h4>Funding</h4>
+                        <div class="form-content">
+                            {% for item in staff.funding %}
+                                <div class="form-group">
+                                    <input type="text" name="funding_{{ loop.index }}" value="{{ item }}" placeholder="Funding Item" class="form-control">
+                                    <button type="button" class="btn btn-danger remove-btn" onclick="removeField(this)">Remove</button>
+                                </div>
+                            {% endfor %}
+                        </div></br></br>
+                        <button type="button" class="btn btn-primary add-btn" onclick="addField('fundingContainer', 'funding')">Add Funding</button>
+                    </div>
+                
+                    <!-- Publications Section -->
+                    <div class="form-section" id="publications_container">
+                        <h4>Recent Research Publications</h4>
+                        <div class="form-content">
+                            {% for item in staff.publications %}
+                                <div class="form-group">
+                                    <input type="text" name="publications_title_{{ loop.index }}" value="{{ item.title }}" placeholder="Title" class="form-control">
+                                    <input type="text" name="publications_link_{{ loop.index }}" value="{{ item.link }}" placeholder="Link" class="form-control">
+                                    <button type="button" class="btn btn-danger remove-btn" onclick="removeField(this)">Remove</button>
+                                </div>
+                            {% endfor %}
+                        </div></br></br>
+                        <button type="button" class="btn btn-primary add-btn" onclick="addField('publications_container', 'publications')">Add Publication</button>
+                    </div>
+                </div>
+                
+
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <br><button type="submit" class="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>        
+    <footer class="footer">
+        <div class="col-sm-12 text-center">
+            <p>&copy; 2024 Madras Christian College. All Rights Reserved.</p>
+        </br><p style="font-size: 12px;">Designed and Developed by MCC - MRF Innovation Park</p>
+        </div>
+    </footer>
+     <!-- jQuery and Bootstrap JS for tooltips and dynamic content -->
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+     <script>
+        // Function to add new fields dynamically
+        function addField(containerId, sectionType) {
+          var container = document.getElementById(containerId);
+          var index = container.getElementsByClassName('form-group').length + 1;
+          var div = document.createElement('div');
+          div.className = 'form-group';
+      
+          if (sectionType === 'education') {
+              div.innerHTML = `
+                  <input type="text" name="education_degree_${index}" placeholder="Degree" class="form-control" required>
+                  <input type="text" name="education_college_${index}" placeholder="College" class="form-control" required>
+                  <input type="text" name="education_duration_${index}" placeholder="Duration" class="form-control" required>
+                  <button type="button" class="btn btn-danger remove-btn" onclick="removeField(this)">Remove</button>
+              `;
+          } else if (sectionType === 'research_ids') {
+              div.innerHTML = `
+                  <input type="text" name="research_ids_title_${index}" placeholder="Title" class="form-control" required>
+                  <input type="text" name="research_ids_id_${index}" placeholder="ID or Link" class="form-control" required>
+                  <button type="button" class="btn btn-danger remove-btn" onclick="removeField(this)">Remove</button>
+              `;
+          } else if (sectionType === 'funding') {
+              div.innerHTML = `
+                  <input type="text" name="funding_${index}" placeholder="Funding Item" class="form-control" required>
+                  <button type="button" class="btn btn-danger remove-btn" onclick="removeField(this)">Remove</button>
+              `;
+          } else if (sectionType === 'publications') {
+              div.innerHTML = `
+                  <input type="text" name="publications_title_${index}" placeholder="Title" class="form-control" required>
+                  <input type="url" name="publications_link_${index}" placeholder="Link" class="form-control" required>
+                  <button type="button" class="btn btn-danger remove-btn" onclick="removeField(this)">Remove</button>
+              `;
+          }
+      
+          container.querySelector('.form-content').appendChild(div);
+        }
+      
+        // Function to remove a field
+        function removeField(button) {
+          button.closest('.form-group').remove();
+        }
+      
+        // JavaScript for removing profile picture
+        document.addEventListener('DOMContentLoaded', function() {
+          var removeButton = document.getElementById('remove-profile-picture');
+          if (removeButton) {
+            removeButton.addEventListener('click', function() {
+              document.getElementById('remove_profile_picture').value = 'yes'; // Set hidden input to 'yes'
+              document.querySelector('.profile-picture-container').style.display = 'none'; // Hide the current image and button
+            });
+          }
+        });
+      </script>     
+
+
+
+</body>
+</html>

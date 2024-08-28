@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/view_details.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <style>
+        /* Apply colors dynamically */
+        header.head {
+            background-color: {{ colors.header_color }};
+            border-radius: 7px;
+        }
+        .sidebar {
+            background-color: {{ colors.sidebar_color }};
+            border-radius: 7px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="header">
+        <img src="/static/images/mcc_logo.png" alt="MCC Logo">
+        <div class="header-content">
+            <h4>MADRAS CHRISTIAN COLLEGE (AUTONOMOUS)</h4>
+            <h4>TAMBARAM, CHENNAI - 600 059</h4></br>
+            <h5>DEANERY - RESEARCH AND DEVELOPMENT</h5>
+        </div>  
+    </header>
+
+    <div class="container">
+        <header class="head">
+            <div class="contact-info">
+                <h1>{{ details.name }}</h1>
+                <p>{{ details.title }}</p>
+                <p>{{ details.institution }}</p>
+                <p> {{ details.department }}</p>
+            </div>
+            <div class="profile-picture">
+                {% if details.profile_picture %}
+            <img src="{{ url_for('static', filename='uploads/' ~ details.profile_picture) }}" alt="Profile Picture">
+                {% else %}
+            <img src="{{ url_for('static', filename='uploads/default.webp') }}" alt="Default Profile Picture">
+                {% endif %}
+
+            </div>
+        </header>
+
+        <div class="main-container">
+            <div class="leftbar">
+                <div class="section">
+                    <h2>Education</h2>
+                    {% if details.education %}
+                    <ul class="edu-container">
+                        {% for item in details.education %}
+                        <li>{{ item.degree }} - {{ item.college }} - {{ item.duration }}</li>
+
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No education details available.</p>
+                    {% endif %}
+                </div>
+                <div class="section">
+                    <h2>Career Highlights</h2>
+                    {% if details.career_highlights %}
+                    <ul>
+                        {% for highlight in details.career_highlights %}
+                        <li>{{ highlight }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No career highlights available.</p>
+                    {% endif %}
+                </div>
+
+
+
+
+
+
+
+                <div class="section">
+                    <h2>Recent Research Publications</h2>
+                    {% if details.publications %}
+                    <ul>
+                        {% for item in details.publications %}
+                        <li>{{ item.title }} - <a href="{{ item.link }}" target="_blank">Link</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No publications available.</p>
+                    {% endif %}
+                </div>
+                <div class="section">
+                    <h2>Research Areas</h2>
+                    {% if details.research_areas %}
+                    <ul class="research-conx">
+                        {% for area in details.research_areas %}
+                        <li>{{ area }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No research areas available.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="sidebar">
+
+
+                <div class="section">
+                    <h2>Personal Information</h2>
+
+                    <p class="icons"><i class='bx bx-envelope icons'></i> <a href="mailto:{{ details.email }}">{{
+                            details.email }}</a></p>
+                    <p class="icons"><i class='bx bx-current-location icons'></i> {{ details.address }}</p>
+                    <p class="icons"><i class='bx bx-globe icons'></i><a href="{{ details.website }}" target="_blank">{{
+                            details.website
+                            }}</a></p>
+                    <p class="icons"> <i class='bx bxs-phone icons'></i> {{ details.phone }}</p>
+                    
+                </div>
+                <div class="section">
+                    <h2>Research Career</h2>
+                    {% if details.research_career %}
+                    <ul type="disc">
+                        {% for career in details.research_career %}
+                        <li>{{ career }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No research career details available.</p>
+                    {% endif %}
+                </div>
+
+
+
+                <div class="section">
+                    <h2>Research IDs</h2>
+                    {% if details.research_ids %}
+                    <ul>
+                        {% for item in details.research_ids %}
+                        <li>{{ item.title }} - <a href="{{ item.id }}" target="_blank">Link</a></li>
+
+                        {% endfor %}
+
+                    </ul>
+                    {% else %}
+                    <p>No research IDs available.</p>
+                    {% endif %}
+                </div>
+
+                <div class="section">
+                    <h2>Funding</h2>
+                    {% if details.funding %}
+                    <ul>
+                        {% for item in details.funding %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No funding information available.</p>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="col-sm-12 text-center">
+            <p>&copy; 2024 Madras Christian College. All Rights Reserved.</p>
+        </br><p style="font-size: 12px;">Designed and Developed by MCC - MRF Innovation Park</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

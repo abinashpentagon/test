@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Information</title>   
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+</head>
+<body>
+    <header class="header">
+        <img src="/static/images/mcc_logo.png" alt="MCC Logo">
+        <div class="header-content">
+            <h4>MADRAS CHRISTIAN COLLEGE (AUTONOMOUS)</h4>
+            <h4>TAMBARAM, CHENNAI - 600 059</h4></br>
+            <h5>DEANERY - RESEARCH AND DEVELOPMENT</h5>
+        </div>  
+    </header>
+    <div class="notification hide" id="notification">
+        <div class="notification__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none">
+                <path fill="#fff" d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z"></path>
+            </svg>
+        </div>
+        <div class="notification__title" id="notification-title"></div>
+        <div class="notification__close" id="notification-close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20">
+                <path fill="#fff" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path>
+            </svg>
+        </div>
+    </div>
+    <div class="content">
+        <div class="login-container">
+            <h2>Personal Information</h2></br></br>
+            <form method="POST" enctype="multipart/form-data">
+                <!-- Personal Information Section -->
+                <div class="form-section">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Full Name" required 
+                               data-toggle="tooltip" data-placement="top" title="Enter your full name as it appears on official documents.">
+                    </div>
+                    <div class="form-group">
+                        <select name="department" class="form-control" required 
+                                data-toggle="tooltip" data-placement="top" title="Select your degree program.">
+                            <option value="" disabled selected>Select Degree</option>
+                            <option value="B. A. English Language and Literature">B. A. English Language and Literature</option>
+                            <option value="B. A. Tamil Literature">B. A. Tamil Literature</option>
+                            <option value="B. A. History">B. A. History</option>
+                            <option value="B. A. Political Science">B. A. Political Science</option>
+                            <option value="B. A. Economics">B. A. Economics</option>
+                            <option value="B. A. Philosophy">B. A. Philosophy</option>
+                            <option value="B. Com. – Commerce">B. Com. – Commerce (Aided)</option>
+                            <option value="B. Sc. Mathematics">B. Sc. Mathematics</option>
+                            <option value="B. Sc. Statistics">B. Sc. Statistics</option>
+                            <option value="B. Sc. Physics">B. Sc. Physics</option>
+                            <option value="B. Sc. Chemistry">B. Sc. Chemistry</option>
+                            <option value="B. Sc. Plant Biology and Plant Biotechnology">B. Sc. Plant Biology and Plant Biotechnology</option>
+                            <option value="B. Sc. Zoology">B. Sc. Zoology</option>
+                            <option value="M. A. English Language and Literature">M. A. English Language and Literature</option>
+                            <option value="M. A. Tamil Literature">M. A. Tamil Literature</option>
+                            <option value="M. A. History">M. A. History</option>
+                            <option value="M. A. Political Science">M. A. Political Science</option>
+                            <option value="M. A. Public Administration">M. A. Public Administration</option>
+                            <option value="M. A. Economics">M. A. Economics</option>
+                            <option value="M. A. Philosophy">M. A. Philosophy</option>
+                            <option value="M. Com. – Commerce">M. Com. – Commerce</option>
+                            <option value="M. S. W. (Community Development & Medical Psychiatry)">M. S. W. (Community Development & Medical Psychiatry)</option>
+                            <option value="M. Sc. Mathematics">M. Sc. Mathematics</option>
+                            <option value="M. Sc. Statistics">M. Sc. Statistics</option>
+                            <option value="M. Sc. Physics">M. Sc. Physics</option>
+                            <option value="M. Sc. Chemistry">M. Sc. Chemistry (Aided)</option>
+                            <option value="M. Sc. Plant Biology and Plant Biotechnology">M. Sc. Plant Biology and Plant Biotechnology</option>
+                            <option value="M. Sc. Zoology">M. Sc. Zoology</option>
+                            <option value="B. A. Journalism">B. A. Journalism</option>
+                            <option value="B. A. History (Vocational)– (Archeology and Museology) – (Shift I)">B. A. History (Vocational)– (Archeology and Museology) – (Shift I)</option>
+                            <option value="B. S. W. Social Work">B. S. W. Social Work</option>
+                            <option value="B. Com. – Commerce (SFS)">B. Com. – Commerce (SFS)</option>
+                            <option value="B. Com. Accounting and Finance">B. Com. Accounting and Finance</option>
+                            <option value="B. Com. Professional Accounting">B. Com. Professional Accounting</option>
+                            <option value="B. B. A. Business Administration">B. B. A. Business Administration</option>
+                            <option value="B. Sc. Geography, Tourism and Travel Management">B. Sc. Geography, Tourism and Travel Management</option>
+                            <option value="B. Sc. Hospitality and Tourism">B. Sc. Hospitality and Tourism</option>
+                            <option value="B. Sc. Microbiology">B. Sc. Microbiology</option>
+                            <option value="B. C. A. Computer Application">B. C. A. Computer Application</option>
+                            <option value="B. Sc. Computer Science">B. Sc. Computer Science</option>
+                            <option value="B. Sc. Visual Communication">B. Sc. Visual Communication</option>
+                            <option value="B. Sc. Physical Education, Health Education and Sports">B. Sc. Physical Education, Health Education and Sports</option>
+                            <option value="B. Sc. Psychology">B. Sc. Psychology</option>
+                            <option value="B. Sc. Mathematics (SFS)">B. Sc. Mathematics (SFS)</option>
+                            <option value="B. Sc. Physics (SFS)">B. Sc. Physics (SFS)</option>
+                            <option value="M. S. W. Social Work (Human Resource Management)">M. S. W. Social Work (Human Resource Management)</option>
+                            <option value="M. Com. Computer Oriented Business Application">M. Com. Computer Oriented Business Application</option>
+                            <option value="M. A. Communication">M. A. Communication</option>
+                            <option value="M. Sc. Applied Microbiology">M. Sc. Applied Microbiology</option>
+                            <option value="M. C. A.  Computer Application">M. C. A.  Computer Application</option>
+                            <option value="M. Sc. Data Science (Provisional)">M. Sc. Data Science (Provisional)</option>
+                            <option value="M. Sc. Chemistry (SFS)">M. Sc. Chemistry (SFS)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="title" class="form-control" placeholder="Title" required 
+                               data-toggle="tooltip" data-placement="top" title="Enter your professional title.">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="institution" class="form-control" placeholder="Institution" required 
+                               data-toggle="tooltip" data-placement="top" title="Enter your affiliated institution.">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required 
+                               pattern="^[a-zA-Z0-9._%+-]+@mcc\.edu\.in$">
+                        <small id="emailHelp" class="form-text text-muted" style="display: none; color: red;">Please enter an email ending with @mcc.edu.in</small>
+                    </div>
+                
+                    <div class="form-group">
+                        <input type="tel" name="phone" class="form-control" placeholder="Phone" required 
+                               data-toggle="tooltip" data-placement="top" title="Enter your phone number.">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="address" class="form-control" placeholder="Address" required 
+                               data-toggle="tooltip" data-placement="top" title="Enter your residential address.">
+                    </div>
+                    <div class="form-group">
+                        <input type="url" name="website" class="form-control" placeholder="Website" 
+                               data-toggle="tooltip" data-placement="top" title="Enter your personal or professional website URL.">
+                    </div>
+                    <div class="form-group">
+                        <input type="file" name="profile_picture" class="form-control" required
+                               data-toggle="tooltip" data-placement="top" title="Upload a profile picture.">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="research_areas" class="form-control" placeholder="Research Areas" rows="5"  
+                                  data-toggle="tooltip" data-placement="top" title="Enter your research areas. Separate each area with a new line."></textarea>
+                    </div>
+                </div></br>
+                
+                <!-- Career Highlights Section -->
+                <div class="form-section">
+                    <h4>Career Highlights</h4>
+                    <div class="form-group">
+                        <textarea name="career_highlights" class="form-control" placeholder="Career Highlights" rows="5" 
+                                  data-toggle="tooltip" data-placement="top" title="Enter your career highlights. Separate each highlight with a new line."></textarea>
+                    </div>
+                </div></br></br>
+    
+                <!-- Research Career Section -->
+                <div class="form-section">
+                    <h4>Research Career</h4>
+                    <div class="form-group">
+                        <textarea name="research_career" class="form-control" placeholder="Research Career" rows="5" 
+                                  data-toggle="tooltip" data-placement="top" title="Enter your research career details. Separate each detail with a new line."></textarea>
+                    </div>
+                </div></br></br>
+
+                <!-- Education Section -->
+                <div class="form-section">
+                    <h4>Education</h4>
+                    <div id="education-section" class="dynamic-section"></div>
+                    <button type="button" class="btn btn-secondary mt-2" id="add-education">Add Education</button>
+                </div></br></br>
+
+                <!-- Research IDs Section -->
+                <div class="form-section">
+                    <h4>Research IDs</h4>
+                    <div id="research-ids-section" class="dynamic-section"></div>
+                    <button type="button" class="btn btn-secondary mt-2" id="add-research-id">Add Research ID</button>
+                </div></br></br>
+    
+                
+    
+                
+    
+                <!-- Funding Section -->
+                <div class="form-section">
+                    <h4>Funding</h4>
+                    <div id="funding-section" class="dynamic-section"></div>
+                    <button type="button" class="btn btn-secondary mt-2" id="add-funding">Add Funding</button>
+                </div></br></br>
+    
+                <!-- Recent Research Publications Section -->
+                <div class="form-section">
+                    <h4>Recent Research Publications</h4>
+                    <div id="publications-section" class="dynamic-section"></div>
+                    <button type="button" class="btn btn-secondary mt-2" id="add-publication">Add Publication</button>
+                </div></br></br>
+    
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>        
+    <footer class="footer">
+        <div class="col-sm-12 text-center">
+            <p>&copy; 2024 Madras Christian College. All Rights Reserved.</p>
+        </br><p style="font-size: 12px;">Designed and Developed by MCC - MRF Innovation Park</p>
+        </div>
+    </footer>
+     <!-- jQuery and Bootstrap JS for tooltips and dynamic content -->
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+     <!-- Add this script to handle multi-line text inputs more gracefully -->
+     
+     <script>
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationTitle = document.getElementById('notification-title');
+            notificationTitle.textContent = message;
+            notification.classList.remove('hide'); // Ensure hide class is removed
+            notification.classList.add('show'); // Add show class to make it visible
+            setTimeout(() => {
+                notification.classList.remove('show'); // Start hiding the notification
+                notification.classList.add('hide'); // Add hide class to fade out and move up
+    
+                setTimeout(() => {
+                    notification.classList.remove('hide'); // Ensure hide class is removed for next notification
+                    notification.style.display = 'none'; // Hide the notification after animation
+                }, 500); // Delay to match the transition duration
+            }, 5000); // Hide after 5 seconds
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            // Parse flashed messages from Flask
+            const messages = JSON.parse('{{ get_flashed_messages(with_categories=True) | tojson | safe }}');
+    
+            // Check if there are any messages to display
+            if (messages.length > 0) {
+                showNotification(messages.map(msg => msg[1]).join(' ')); // Show messages if any
+            } else {
+                const notification = document.getElementById('notification');
+                notification.style.display = 'none'; // Ensure hidden if no messages
+            }
+        });
+    
+        // Handle close button click to manually hide notification
+        document.getElementById('notification-close').addEventListener('click', () => {
+            const notification = document.getElementById('notification');
+            notification.classList.remove('show');
+            notification.classList.add('hide');
+    
+            setTimeout(() => {
+                notification.classList.remove('hide');
+                notification.style.display = 'none'; // Hide the notification after animation
+            }, 500); // Delay to match the transition duration
+        });
+    
+        document.addEventListener('DOMContentLoaded', function () {
+            const emailInput = document.getElementById('email');
+            const emailHelp = document.getElementById('emailHelp');
+    
+            emailInput.addEventListener('input', function () {
+                const emailPattern = /^[a-zA-Z0-9._%+-]+@mcc\.edu\.in$/;
+                if (emailInput.value && !emailPattern.test(emailInput.value)) {
+                    emailHelp.style.display = 'block'; // Show the message
+                } else {
+                    emailHelp.style.display = 'none'; // Hide the message
+                }
+            });
+        });
+    </script>
+   <script>
+    $(function () {
+        // Initialize tooltips
+        $('[data-toggle="tooltip"]').tooltip();
+
+        // Function to handle adding and removing dynamic fields
+        function addDynamicField(buttonId, sectionId, fieldHtml) {
+            $(buttonId).click(function() {
+                const section = $(sectionId);
+                const index = section.children('.form-group').length + 1;
+                section.append(fieldHtml(index)).show();
+            });
+
+            $(sectionId).on('click', '.remove-item', function() {
+                $(this).closest('.form-group').remove();
+                if ($(sectionId).children('.form-group').length === 0) {
+                    $(sectionId).hide(); // Hide section if no fields are left
+                }
+            });
+        }
+
+        // Add dynamic fields with proper index handling
+        addDynamicField('#add-research-id', '#research-ids-section', function(index) {
+            return `
+                <div class="form-group">
+                    <input type="text" name="research_ids_title_${index}" class="form-control" placeholder="Title" required>
+                    <input type="text" name="research_ids_id_${index}" class="form-control mt-2" placeholder="Id or Link"required >
+                    <button type="button" class="btn btn-danger remove-item mt-2">Remove</button>
+                </div>
+            `;
+        });
+
+        addDynamicField('#add-education', '#education-section', function(index) {
+            return `
+                <div class="form-group">
+                    <input type="text" name="education_degree_${index}" class="form-control" placeholder="Degree" required>
+                    <input type="text" name="education_college_${index}" class="form-control mt-2" placeholder="College" required>
+                    <input type="text" name="education_duration_${index}" class="form-control mt-2" placeholder="Duration" required>
+                    <button type="button" class="btn btn-danger remove-item mt-2">Remove</button>
+                </div>
+            `;
+        });
+
+        addDynamicField('#add-funding', '#funding-section', function(index) {
+            return `
+                <div class="form-group">
+                    <input type="text" name="funding_${index}" class="form-control" placeholder="Funding" required>
+                    <button type="button" class="btn btn-danger remove-item mt-2">Remove</button>
+                </div>
+            `;
+        });
+
+        addDynamicField('#add-publication', '#publications-section', function(index) {
+            return `
+                <div class="form-group">
+                    <input type="text" name="publications_title_${index}" class="form-control" placeholder="Publication Title" required>
+                    <input type="url" name="publications_link_${index}" class="form-control mt-2" placeholder="Publication Link" required>
+                    <button type="button" class="btn btn-danger remove-item mt-2">Remove</button>
+                </div>
+            `;
+        });
+    });
+</script>
+
+
+</body>
+</html>

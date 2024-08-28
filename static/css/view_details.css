@@ -1,0 +1,244 @@
+* {
+    box-sizing: border-box; /* Ensures padding and borders are included in the element's width and height */
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: #ffffdf;
+    
+}
+
+header.header {
+
+top: 0;
+left: 0;
+width: 100%;
+background-color: #78091e;
+color: white;
+z-index: 1000;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+display: flex;
+align-items: center; /* Center items vertically */
+padding: 0 20px;
+}
+
+header.header img {
+max-width: 100px;
+height: auto;
+}
+
+header.header .header-content {
+flex: 1; /* Allow the header content to expand */
+display: flex;
+flex-direction: column; /* Stack the items vertically */
+align-items: center; /* Center the items horizontally */
+justify-content: center; /* Center items vertically */
+gap: 5px; /* Equal gap between the elements */
+text-align: center; /* Center text */
+margin-left: -90px;
+}
+
+header.header h4 {
+font-size: 20px;
+margin: 0; /* Remove default margin */
+}
+
+header.header h5 {
+font-size: 17px;
+margin: 0; /* Remove default margin */
+}
+
+/* Footer Styling */
+footer.footer {
+  
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #78091e;
+    padding: 25px 10px; /* Reduced padding */
+    color: white;
+    text-align: center;
+    z-index: 1000; /* Ensure it stays on top */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Add subtle shadow for distinction */
+}
+
+footer.footer h4, footer.footer h5, footer.footer h6 {
+    font-size: 14px; /* Reduced font size */
+    
+}
+
+footer.footer img {
+    max-width: 50px; /* Reduced logo size */
+}
+
+/* Existing Header and Footer Styles */
+header.header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #78091e;
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center; /* Center items vertically */
+    padding: 0 20px;
+}
+
+header.header img {
+    max-width: 100px;
+    height: auto;
+}
+
+header.header .header-content {
+    flex: 1; /* Allow the header content to expand */
+    display: flex;
+    flex-direction: column; /* Stack the items vertically */
+    align-items: center; /* Center the items horizontally */
+    justify-content: center; /* Center items vertically */
+    gap: 5px; /* Equal gap between the elements */
+    text-align: center; /* Center text */
+    margin-left: -90px;
+}
+
+header.header h4 {
+    font-size: 20px;
+    margin: 0; /* Remove default margin */
+}
+
+header.header h5 {
+    font-size: 17px;
+    margin: 0; /* Remove default margin */
+}
+
+/* Footer Styling */
+footer.footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #78091e;
+    padding: 25px 10px; /* Reduced padding */
+    color: white;
+    text-align: center;
+    z-index: 1000; /* Ensure it stays on top */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Add subtle shadow for distinction */
+}
+
+footer.footer h4, footer.footer h5, footer.footer h6 {
+    font-size: 14px; /* Reduced font size */
+}
+
+footer.footer img {
+    max-width: 50px; /* Reduced logo size */
+}
+
+
+
+.container {
+    width: 22cm;
+    margin: auto;
+    padding: 1cm;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 30px auto;
+    border-radius: 7px;
+    line-height: 2;
+    background-size: cover;
+    background-position: center;
+    font-size: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+header {
+    text-align: left;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #438797;
+    padding: 20px;
+ 
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+    color: whitesmoke;
+}
+
+.contact-info {
+    flex: 1;
+    color: whitesmoke;
+}
+
+.contact-info p {
+    margin: 5px 0;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    background-color: #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section h2 {
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+.section p {
+    margin: 0 0 10px 0;
+    padding-left: 15px;
+    text-indent: -15px;
+}
+
+.section a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.section a:hover {
+    text-decoration: underline;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    flex: 0 0 35%; /* Fixed width of 35% */
+    max-width: 35%; /* Ensures it doesn’t exceed 35% */
+    background-color: #e2f3f9;
+    padding: 10px;
+    
+}
+
+/* Ensure the sidebar contents are aligned properly */
+.sidebar .section {
+    margin-left: 18px; /* Align text within each section to the right */
+}
+
+
+
+.main-container {
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Optional: Adds space between the sidebar and leftbar */
+}
+
+.leftbar {
+    flex: 1; /* Takes up remaining space */
+}

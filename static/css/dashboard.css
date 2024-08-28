@@ -1,0 +1,511 @@
+/* General Reset */
+* {
+    box-sizing: border-box;
+    /* Ensures padding and borders are included in the element's width and height */
+    margin: 0;
+    padding: 0;
+}
+
+/* Body and HTML */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffdf;
+    overflow-x: hidden;
+    /* Prevents horizontal scrolling */
+}
+
+/* Header Section */
+header.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #78091e;
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+header.header img {
+    max-width: 100px;
+    height: auto;
+}
+
+header.header .header-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    text-align: center;
+
+}
+
+header.header h4 {
+    font-size: 20px;
+    margin: 0;
+}
+
+header.header h5 {
+    font-size: 17px;
+    margin: 0;
+}
+
+.header-logo img {
+    height: 100px;
+    margin-right: 20px;
+}
+
+.header-title {
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Notification Section */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    z-index: 1100;
+    display: none;
+    width: 320px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    background: #ffffdf;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px -3px #111;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(-20px);
+}
+
+.notification.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification.hide {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.notification__icon {
+    width: 20px;
+    height: 20px;
+    transform: translateY(-2px);
+    margin-right: 8px;
+}
+
+.notification__icon path {
+    fill: #800000;
+}
+
+.notification__title {
+    font-weight: 500;
+    font-size: 14px;
+    color: #800000;
+}
+
+.notification__close {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.notification__close path {
+    fill: #800000;
+}
+
+/* Footer Section */
+footer.footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #78091e;
+    padding: 25px 10px;
+    color: white;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer.footer h4,
+footer.footer h5,
+footer.footer h6 {
+    font-size: 14px;
+}
+
+footer.footer img {
+    max-width: 50px;
+}
+
+/* Search Bar */
+.search-bar {
+    margin: 80px 20px 20px;
+    text-align: center;
+    margin-top: 200px;
+}
+
+.search-bar input[type="text"] {
+    width: 40%;
+    padding: 10px;
+    border: 1px solid #800000;
+    border-radius: 5px;
+}
+
+/* Staff Cards Section */
+.staff-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+    margin-top: 15px;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    width: calc(100% - 40px);
+    /* Accounts for padding and margins */
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.card td {
+    vertical-align: middle;
+    padding: 5px;
+    text-align: center;
+}
+
+.img-cell {
+    width: 60px;
+}
+
+.name-cell {
+    width: 250px;
+    text-align: left;
+}
+
+.info-cell {
+    width: 200px;
+}
+
+.button-cell {
+    width: 120px;
+}
+
+.card img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.card h2 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.card p {
+    color: #666;
+    margin: 0;
+}
+
+.card button {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    background-color: #800000;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Academic Programmes Section */
+.academic-programmes {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.academic-programmes h2 {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.programme-list {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+    gap: 70px;
+    /* Increase the gap between columns */
+}
+
+.programme-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 39%;
+    /* Decrease the width slightly to accommodate the larger gap */
+}
+
+.programme-list ul ul {
+    padding-left: 20px;
+    /* Adds indentation to sublists */
+    margin-top: 5px;
+    /* Adds a small gap before the sublist */
+    list-style-type: disc;
+    /* Changes bullet style for the sublist */
+}
+
+.programme-list ul li {
+    margin-bottom: 5px;
+    line-height: 2;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    /* Prevents line breaks */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Adds "..." when the text is too long */
+}
+
+.programme-list ul ul li {
+    margin-bottom: 5px;
+    /* Adds space between sublist items */
+}
+
+.programme-list li {
+    margin-bottom: 5px;
+    line-height: 2;
+    font-size: 1.1rem;
+}
+
+/* Extra Styles */
+.hover-list {
+    position: relative;
+}
+
+.hover-list li {
+    display: none;
+    position: relative;
+}
+
+.hover-list:hover li {
+    display: block;
+    transition: 100ms ease;
+}
+
+.hover-list a:hover {
+    color: #ffffdf;
+    transition: 100ms ease;
+    background-color: #1c1b3b;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.hover-list:hover::after {
+    visibility: visible;
+    transform: scale(100) translateX(2px);
+}
+
+/* Staff List Section */
+.staff-list {
+    list-style-type: disc;
+    margin: 0;
+    padding-left: 20px;
+    display: block;
+}
+
+.staff-list li {
+    margin: 0;
+    padding-left: 0;
+}
+
+.staff-list a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Login Button Section */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+    /* Adjust to control the spacing from elements above */
+    margin-right: 15px;
+    position: relative;
+}
+
+.login-text {
+    font-size: 15px;
+    color: #ffffdf;
+    margin-bottom: 15px;
+    /* Increase the bottom margin to separate text from the button */
+    z-index: 1;
+    /* Ensure the text doesn't overlap the button */
+}
+
+.button-container {
+    margin-top: 0;
+    /* Ensure no additional top margin */
+    position: relative;
+    /* Make sure the button is positioned correctly */
+}
+
+.login-button {
+    background-color: #ffffdf;
+    color: #000000;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    /* Increase padding for a better clickable area */
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    z-index: 2;
+    /* Ensure button is on top of other elements */
+}
+
+.login-button:hover {
+    background: #1c1b3b;
+    color: #ffffdf;
+    transform: scale(1.01);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.login-button:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 850px) {
+    header.header h4 {
+        font-size: 17px;
+        margin: 0;
+    }
+
+    header.header h5 {
+        font-size: 15px;
+        margin: 0;
+    }
+
+    .programme-list {
+        flex-direction: column;
+    }
+
+    .search-bar {
+        margin-top: 200px;
+    }
+
+
+}
+
+@media screen and (max-width: 658px) {
+    header.header h4 {
+        font-size: 12px;
+        margin: 0;
+    }
+
+    header.header h5 {
+        font-size: 9px;
+        margin: 0;
+    }
+
+    header.header img {
+        width: 70px;
+        height: 70%;
+    }
+
+    .login-text {
+        font-size: 12px;
+    }
+
+    .login-button {
+
+        border-radius: 4px;
+        padding: 4px 8px;
+        /* Increase padding for a better clickable area */
+        font-size: 12px;
+        cursor: pointer;
+
+        /* Ensure button is on top of other elements */
+    }
+
+    .search-bar {
+        margin-top: 150px;
+    }
+}
+
+@media screen and (max-width: 564px) {
+    header.header h4 {
+        font-size: 11px;
+        margin: 0;
+    }
+
+    header.header h5 {
+        font-size: 8px;
+        margin: 0;
+    }
+
+    header.header img {
+        width: 60px;
+        height: 60%;
+    }
+
+    .login-text {
+        font-size: 11px;
+    }
+
+    .login-button {
+
+        border-radius: 4px;
+        padding: 3px 7px;
+        /* Increase padding for a better clickable area */
+        font-size: 11px;
+        cursor: pointer;
+
+        /* Ensure button is on top of other elements */
+    }
+
+    .search-bar {
+        margin-top: 150px;
+    }
+}
